@@ -1,0 +1,83 @@
+package ru.dsoccer1980.model;
+
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
+import java.util.Objects;
+
+
+@Entity
+@Table(name = "user_vote")
+public class UserVote extends AbstractBaseEntity {
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @NotNull
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurant_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @NotNull
+    private Restaurant restaurant;
+
+    @Column(name = "date", nullable = false)
+    @NotNull
+    private LocalDate date;
+
+    public UserVote() {
+    }
+
+    public UserVote(UserVote v) {
+        this(v.getId(), v.getUser(), v.getRestaurant(), v.getDate());
+    }
+
+    public UserVote(Integer id, @NotNull User user, @NotNull Restaurant restaurant, @NotNull LocalDate date) {
+        super(id);
+        Objects.requireNonNull(user, "user cannot be null");
+        Objects.requireNonNull(restaurant, "restaurant cannot be null");
+        Objects.requireNonNull(date, "date cannot be null");
+        this.user = user;
+        this.restaurant = restaurant;
+        this.date = date;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "UserVote{" +
+                "dishId=" + id +
+                ", userId=" + user.getId() +
+                ", restaurantId=" + restaurant.getId() +
+                ", date=" + date +
+                '}';
+    }
+}
