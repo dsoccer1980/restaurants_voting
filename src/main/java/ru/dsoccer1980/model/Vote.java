@@ -12,7 +12,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "user_vote")
-public class UserVote extends AbstractBaseEntity {
+public class Vote extends AbstractBaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
@@ -30,14 +30,14 @@ public class UserVote extends AbstractBaseEntity {
     @NotNull
     private LocalDate date;
 
-    public UserVote() {
+    public Vote() {
     }
 
-    public UserVote(UserVote v) {
+    public Vote(Vote v) {
         this(v.getId(), v.getUser(), v.getRestaurant(), v.getDate());
     }
 
-    public UserVote(Integer id, @NotNull User user, @NotNull Restaurant restaurant, @NotNull LocalDate date) {
+    public Vote(Integer id, @NotNull User user, @NotNull Restaurant restaurant, @NotNull LocalDate date) {
         super(id);
         Objects.requireNonNull(user, "user cannot be null");
         Objects.requireNonNull(restaurant, "restaurant cannot be null");
@@ -73,7 +73,7 @@ public class UserVote extends AbstractBaseEntity {
 
     @Override
     public String toString() {
-        return "UserVote{" +
+        return "Vote{" +
                 "dishId=" + id +
                 ", userId=" + user.getId() +
                 ", restaurantId=" + restaurant.getId() +
