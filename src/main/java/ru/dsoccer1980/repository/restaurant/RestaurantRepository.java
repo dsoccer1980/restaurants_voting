@@ -1,4 +1,4 @@
-package ru.dsoccer1980.repository;
+package ru.dsoccer1980.repository.restaurant;
 
 import ru.dsoccer1980.model.Restaurant;
 

@@ -1,4 +1,4 @@
-package ru.dsoccer1980.repository;
+package ru.dsoccer1980.repository.restaurant;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -20,7 +20,7 @@ public interface CrudRestaurantRepository extends JpaRepository<Restaurant, Inte
     @Transactional
     @Modifying
     @Query("DELETE FROM Restaurant u WHERE u.id=:id")
-    boolean delete(@Param("id") int id);
+    int delete(@Param("id") int id);
 
     @Override
     Optional<Restaurant> findById(Integer id);

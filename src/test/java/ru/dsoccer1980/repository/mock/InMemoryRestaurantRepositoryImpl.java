@@ -1,7 +1,7 @@
 package ru.dsoccer1980.repository.mock;
 
 import ru.dsoccer1980.model.Restaurant;
-import ru.dsoccer1980.repository.RestaurantRepository;
+import ru.dsoccer1980.repository.restaurant.RestaurantRepository;
 
 import java.util.ArrayList;
 import java.util.List;

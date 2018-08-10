@@ -1,4 +1,4 @@
-package ru.dsoccer1980.repository;
+package ru.dsoccer1980.repository.restaurant;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
 
     @Override
     public boolean delete(int id) {
-        return repository.delete(id);
+        return repository.delete(id) != 0;
     }
 
     @Override

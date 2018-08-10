@@ -6,9 +6,10 @@ public class RestaurantTestData {
 
     public static final Integer RESTAURANT_ID1 = 100003;
     public static final Integer RESTAURANT_ID2 = 100004;
+    public static final Integer RESTAURANT_ID_NOT_EXIST = 900001;
     public static final Restaurant RESTAURANT1 = new Restaurant(
-            RESTAURANT_ID1, "RestaurantName1", "RestaurantAddress1");
+            RESTAURANT_ID1, "Ginza", "Sadovaya 12");
     public static final Restaurant RESTAURANT2 = new Restaurant(
-            RESTAURANT_ID2, "RestaurantName2", "RestaurantAddress2");
+            RESTAURANT_ID2, "Teremok", "Nevskij 10");
 
 }
