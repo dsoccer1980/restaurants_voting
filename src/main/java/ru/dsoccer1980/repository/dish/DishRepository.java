@@ -1,4 +1,4 @@
-package ru.dsoccer1980.repository;
+package ru.dsoccer1980.repository.dish;
 
 import ru.dsoccer1980.model.Dish;
 
@@ -15,7 +15,5 @@ public interface DishRepository {
 
     List<Dish> getAll();
 
-    List<Dish> getAllDishByRestaurant(int id);
-
-    List<Dish> getDishByDate(LocalDate date);
+    List<Dish> getAllDishByRestaurantAndDate(int id, LocalDate date);
 }

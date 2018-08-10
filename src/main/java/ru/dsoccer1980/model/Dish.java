@@ -34,7 +34,6 @@ public class Dish extends AbstractNamedEntity {
         this(r.getId(), r.getName(), r.getPrice(), r.getRestaurant(), r.getDate());
     }
 
-
     public Dish(Integer id, String name, Integer price, Restaurant restaurant, @NotNull LocalDate date) {
         super(id, name);
         Objects.requireNonNull(price, "price cannot be null");
@@ -43,6 +42,10 @@ public class Dish extends AbstractNamedEntity {
         this.price = price;
         this.restaurant = restaurant;
         this.date = date;
+    }
+
+    public Dish(String name, Integer price, Restaurant restaurant, @NotNull LocalDate date) {
+        this(null, name, price, restaurant, date);
     }
 
     public Integer getPrice() {

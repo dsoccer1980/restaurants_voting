@@ -36,7 +36,6 @@ public class RestaurantRepositoryTest {
     @Test(expected = NotFoundException.class)
     public void getNotExist() {
         Restaurant restaurant = restaurantRepository.get(RESTAURANT_ID_NOT_EXIST);
-        assertEquals(null, restaurant);
     }
 
     @Test
