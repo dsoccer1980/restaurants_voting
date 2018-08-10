@@ -9,6 +9,7 @@ import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ru.dsoccer1980.model.Restaurant;
 import ru.dsoccer1980.repository.restaurant.RestaurantRepository;
+import ru.dsoccer1980.util.exception.NotFoundException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,7 +33,7 @@ public class RestaurantRepositoryTest {
         assertEquals(RESTAURANT1, restaurant);
     }
 
-    @Test
+    @Test(expected = NotFoundException.class)
     public void getNotExist() {
         Restaurant restaurant = restaurantRepository.get(RESTAURANT_ID_NOT_EXIST);
         assertEquals(null, restaurant);
@@ -49,6 +50,13 @@ public class RestaurantRepositoryTest {
         Restaurant newRestaurant = new Restaurant("New Name", "New Address");
         Restaurant restaurant = restaurantRepository.save(newRestaurant);
         assertEquals(newRestaurant, restaurant);
+    }
+
+    @Test
+    public void update() {
+        RESTAURANT1.setAddress("New address");
+        Restaurant updateRestaurant = restaurantRepository.save(RESTAURANT1);
+        assertEquals(updateRestaurant, RESTAURANT1);
     }
 
     @Test

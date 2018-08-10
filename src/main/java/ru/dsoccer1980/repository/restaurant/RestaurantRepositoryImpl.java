@@ -4,8 +4,10 @@ package ru.dsoccer1980.repository.restaurant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.dsoccer1980.model.Restaurant;
+import ru.dsoccer1980.util.exception.NotFoundException;
 
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 public class RestaurantRepositoryImpl implements RestaurantRepository {
@@ -15,6 +17,7 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
 
     @Override
     public Restaurant save(Restaurant restaurant) {
+        Objects.requireNonNull(restaurant, "restaurant cannot be null");
         return repository.save(restaurant);
     }
 
@@ -25,7 +28,7 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
 
     @Override
     public Restaurant get(int id) {
-        return repository.findById(id).orElse(null);
+        return repository.findById(id).orElseThrow(() -> new NotFoundException("Not found entity with id:" + id));
     }
 
     @Override
