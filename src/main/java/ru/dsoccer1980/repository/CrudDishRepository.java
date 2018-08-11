@@ -1,33 +1,34 @@
-package ru.dsoccer1980.repository.vote;
+package ru.dsoccer1980.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
-import ru.dsoccer1980.model.Vote;
+import ru.dsoccer1980.model.Dish;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 @Transactional(readOnly = true)
-public interface CrudVoteRepository extends JpaRepository<Vote, Integer> {
+public interface CrudDishRepository extends JpaRepository<Dish, Integer> {
 
     @Override
     @Transactional
-    Vote save(Vote vote);
+    Dish save(Dish dish);
 
     @Transactional
     @Modifying
-    @Query("DELETE FROM Vote u WHERE u.id=:id")
+    @Query("DELETE FROM Dish u WHERE u.id=:id")
     int delete(@Param("id") int id);
 
     @Override
-    Optional<Vote> findById(Integer id);
+    Optional<Dish> findById(Integer id);
 
     @Override
-    List<Vote> findAll();
+    List<Dish> findAll();
 
-    List<Vote> findByRestaurantIdAndDate(Integer id, LocalDate date);
+    List<Dish> findDishByRestaurantIdAndDate(Integer id, LocalDate date);
+
 }

@@ -1,49 +1,49 @@
-package ru.dsoccer1980.repository;
+package ru.dsoccer1980.service;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.dsoccer1980.model.User;
-import ru.dsoccer1980.repository.user.UserRepository;
+
 
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static ru.dsoccer1980.testdata.UserTestData.*;
 
-public class UserRepositoryTest extends AbstractRepositoryTest {
+public class UserServiceImplTest extends AbstractServiceTest {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService service;
 
     @Test
     public void save() throws Exception {
         User newUser = new User("New User", "e@mail.ru", "pass");
-        User user = userRepository.save(newUser);
+        User user = service.create(newUser);
         assertEquals(newUser, user);
     }
 
     @Test
     public void delete() throws Exception {
-        userRepository.delete(USER_ID1);
-        assertEquals(Arrays.asList(USER2, ADMIN), userRepository.getAll());
+        service.delete(USER_ID1);
+        assertEquals(Arrays.asList(USER2, ADMIN), service.getAll());
     }
 
     @Test
     public void get() throws Exception {
-        User user = userRepository.get(USER_ID1);
+        User user = service.get(USER_ID1);
         assertEquals(USER1, user);
     }
 
     @Test
     public void getAll() throws Exception {
-        List<User> users = userRepository.getAll();
+        List<User> users = service.getAll();
         assertEquals(Arrays.asList(USER1, USER2, ADMIN), users);
     }
 
     @Test
     public void getByEmail() throws Exception {
-        User searchUser = userRepository.getByEmail(USER1_EMAIL);
+        User searchUser = service.getByEmail(USER1_EMAIL);
         assertEquals(USER1, searchUser);
     }
 
