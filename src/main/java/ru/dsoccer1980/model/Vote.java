@@ -47,6 +47,10 @@ public class Vote extends AbstractBaseEntity {
         this.date = date;
     }
 
+    public Vote(@NotNull User user, @NotNull Restaurant restaurant, @NotNull LocalDate date) {
+        this(null, user, restaurant, date);
+    }
+
     public User getUser() {
         return user;
     }

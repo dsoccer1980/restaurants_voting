@@ -1,4 +1,4 @@
-package ru.dsoccer1980.repository;
+package ru.dsoccer1980.repository.vote;
 
 import ru.dsoccer1980.model.Vote;
 
@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface VoteRepository {
 
-    Vote save(Vote restaurant);
+    Vote save(Vote vote);
 
     boolean delete(int id);
 

@@ -1,4 +1,4 @@
-package ru.dsoccer1980;
+package ru.dsoccer1980.repository;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
