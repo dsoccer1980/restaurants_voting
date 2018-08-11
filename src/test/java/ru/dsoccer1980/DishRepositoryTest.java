@@ -1,12 +1,8 @@
 package ru.dsoccer1980;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.context.jdbc.SqlConfig;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
 import ru.dsoccer1980.model.Dish;
 import ru.dsoccer1980.repository.dish.DishRepository;
 import ru.dsoccer1980.util.exception.NotFoundException;
@@ -21,12 +17,8 @@ import static ru.dsoccer1980.testdata.DishTestData.*;
 import static ru.dsoccer1980.testdata.RestaurantTestData.RESTAURANT1;
 import static ru.dsoccer1980.testdata.RestaurantTestData.RESTAURANT_ID1;
 
-@ContextConfiguration({
-        "classpath:spring/spring-db.xml"
-})
-@RunWith(SpringJUnit4ClassRunner.class)
-@Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
-public class DishRepositoryTest {
+
+public class DishRepositoryTest extends AbstractRepositoryTest {
 
     @Autowired
     private DishRepository dishRepository;
