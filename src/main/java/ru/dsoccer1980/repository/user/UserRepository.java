@@ -1,4 +1,4 @@
-package ru.dsoccer1980.repository;
+package ru.dsoccer1980.repository.user;
 
 import ru.dsoccer1980.model.User;
 
