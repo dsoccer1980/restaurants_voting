@@ -16,7 +16,7 @@ public class DishTestData {
     public static final Integer DISH_ID4 = 100008;
     public static final Integer DISH_ID5 = 100009;
     public static final Integer DISH_ID6 = 100010;
-    public static final LocalDate DATE1 = LocalDate.of(2018, 07, 26);
+    public static final LocalDate DATE1 = LocalDate.of(2018, 7, 26);
 
     public static final Integer DISH_ID_NOT_EXIST = 900001;
     public static final Dish DISH1 = new Dish(

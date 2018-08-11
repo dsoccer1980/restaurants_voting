@@ -15,7 +15,7 @@ import static ru.dsoccer1980.testdata.RestaurantTestData.RESTAURANT_ID1;
 import static ru.dsoccer1980.testdata.UserTestData.USER1;
 import static ru.dsoccer1980.testdata.VoteTestData.*;
 
-public class VoteRepositoryImplTest extends AbstractRepositoryTest {
+public class VoteRepositoryTest extends AbstractRepositoryTest {
 
     @Autowired
     private VoteRepository voteRepository;

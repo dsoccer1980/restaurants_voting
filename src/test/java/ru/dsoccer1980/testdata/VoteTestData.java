@@ -13,7 +13,7 @@ public class VoteTestData {
 
     public static final Integer VOTE_ID1 = 100011;
     public static final Integer VOTE_ID2 = 100012;
-    public static final LocalDate DATE1 = LocalDate.of(2018, 07, 26);
+    public static final LocalDate DATE1 = LocalDate.of(2018, 7, 26);
     public static final Vote VOTE1 = new Vote(
             VOTE_ID1, USER1, RESTAURANT1, DATE1);
     public static final Vote VOTE2 = new Vote(
