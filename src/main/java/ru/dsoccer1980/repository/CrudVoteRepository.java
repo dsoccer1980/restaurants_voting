@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 import ru.dsoccer1980.model.Vote;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -30,4 +31,9 @@ public interface CrudVoteRepository extends JpaRepository<Vote, Integer> {
     List<Vote> findAll();
 
     List<Vote> findByRestaurantIdAndDate(Integer id, LocalDate date);
+
+    List<Vote> findByUserId(int userId);
+
+    @Query("SELECT v FROM Vote v JOIN FETCH v.restaurant WHERE v.date=:date")
+    List<Vote> findByDate(@Param("date") LocalDate date);
 }

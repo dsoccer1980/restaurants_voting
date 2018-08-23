@@ -2,14 +2,15 @@ package ru.dsoccer1980.service;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import ru.dsoccer1980.model.Restaurant;
 import ru.dsoccer1980.model.Vote;
 
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.Assert.assertEquals;
+import static ru.dsoccer1980.testdata.RestaurantTestData.RESTAURANT1;
+import static ru.dsoccer1980.testdata.RestaurantTestData.RESTAURANT2;
 import static ru.dsoccer1980.testdata.RestaurantTestData.RESTAURANT_ID1;
 import static ru.dsoccer1980.testdata.UserTestData.USER_ID1;
 import static ru.dsoccer1980.testdata.VoteTestData.*;
@@ -44,6 +45,21 @@ public class VoteServiceTest extends AbstractServiceTest {
     public void getVotesByRestaurantAndByDate() {
         List<Vote> votes = service.getVotesByRestaurantAndByDate(RESTAURANT_ID1, DATE1);
         assertEquals(Arrays.asList(VOTE1), votes);
+    }
+
+    @Test
+    public void getVotesByUserId() {
+        List<Vote> votes = service.getAllVotesByUser(USER_ID1);
+        assertEquals(Arrays.asList(VOTE1), votes);
+    }
+
+    @Test
+    public void getVotesAmountForRestaurantsByDate() {
+        Map<Restaurant, Long> votesAmount = service.getVotesAmountForRestaurantsByDate(DATE1);
+        Map<Restaurant, Long> expectedMap = new HashMap<>();
+        expectedMap.put(RESTAURANT1, 1L);
+        expectedMap.put(RESTAURANT2, 2L);
+        assertEquals(expectedMap, votesAmount);
     }
 
 }

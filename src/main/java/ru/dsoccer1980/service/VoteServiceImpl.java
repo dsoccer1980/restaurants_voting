@@ -15,7 +15,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
-
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 
 @Service
@@ -36,7 +37,6 @@ public class VoteServiceImpl implements VoteService {
         this.restaurantRepository = restaurantRepository;
     }
 
-
     @Override
     public Vote save(Integer userId, Integer restaurantId, LocalDate date) {
         if (canVote(date)) {
@@ -46,8 +46,7 @@ public class VoteServiceImpl implements VoteService {
                     .orElseThrow(() -> new NotFoundException("Not found entity with id:" + restaurantId));
             Vote vote = new Vote(user, restaurant, date);
             return voteRepository.save(vote);
-        }
-        else {
+        } else {
             throw new VoteException("you can not vote this date");
         }
     }
@@ -66,6 +65,19 @@ public class VoteServiceImpl implements VoteService {
     @Override
     public List<Vote> getVotesByRestaurantAndByDate(int id, LocalDate date) {
         return voteRepository.findByRestaurantIdAndDate(id, date);
+    }
+
+    @Override
+    public List<Vote> getAllVotesByUser(int userId) {
+        return voteRepository.findByUserId(userId);
+    }
+
+    @Override
+    public Map<Restaurant, Long> getVotesAmountForRestaurantsByDate(LocalDate date) {
+        List<Vote> votes = voteRepository.findByDate(date);
+        Map<Restaurant, Long> map = new ConcurrentHashMap<>();
+        votes.forEach(vote -> map.merge(vote.getRestaurant(), 1L, (k, v) -> v + 1));
+        return map;
     }
 
     private boolean canVote(LocalDate date) {
