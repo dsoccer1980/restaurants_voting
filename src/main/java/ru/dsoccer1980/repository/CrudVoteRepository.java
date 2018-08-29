@@ -7,7 +7,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 import ru.dsoccer1980.model.Vote;
 
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -21,8 +20,8 @@ public interface CrudVoteRepository extends JpaRepository<Vote, Integer> {
 
     @Transactional
     @Modifying
-    @Query("DELETE FROM Vote u WHERE u.id=:id")
-    int delete(@Param("id") int id);
+    @Query("DELETE FROM Vote u WHERE u.user.id=:userId and u.date=:date")
+    int delete(@Param("userId") int userId, @Param("date") LocalDate date);
 
     @Override
     Optional<Vote> findById(Integer id);
@@ -32,8 +31,11 @@ public interface CrudVoteRepository extends JpaRepository<Vote, Integer> {
 
     List<Vote> findByRestaurantIdAndDate(Integer id, LocalDate date);
 
-    List<Vote> findByUserId(int userId);
+    @Query("SELECT v FROM Vote v JOIN FETCH v.restaurant WHERE v.user.id=:userId")
+    List<Vote> findByUserId(@Param("userId") int userId);
 
     @Query("SELECT v FROM Vote v JOIN FETCH v.restaurant WHERE v.date=:date")
     List<Vote> findByDate(@Param("date") LocalDate date);
+
+    Optional<Vote> findByUserIdAndDate(@Param("userId") int userId, @Param("date") LocalDate date);
 }

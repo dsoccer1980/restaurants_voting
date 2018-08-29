@@ -13,9 +13,9 @@ public interface VoteService {
 
     Vote save(Integer userId, Integer restaurantId, LocalDate date);
 
-    boolean delete(int id);
+    Vote save(Vote vote);
 
-    Vote get(int id);
+    boolean delete(int userId, LocalDate date);
 
     List<Vote> getVotesByRestaurantAndByDate(int id, LocalDate date);
 
@@ -23,4 +23,5 @@ public interface VoteService {
 
     Map<Restaurant, Long> getVotesAmountForRestaurantsByDate(LocalDate date);
 
+    Vote get(int userId, LocalDate date);
 }

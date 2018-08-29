@@ -12,10 +12,10 @@ import ru.dsoccer1980.util.exception.NotFoundException;
 import ru.dsoccer1980.util.exception.VoteException;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 
@@ -44,7 +44,9 @@ public class VoteServiceImpl implements VoteService {
                     .orElseThrow(() -> new NotFoundException("Not found entity with id:" + userId));
             Restaurant restaurant = restaurantRepository.findById(restaurantId)
                     .orElseThrow(() -> new NotFoundException("Not found entity with id:" + restaurantId));
-            Vote vote = new Vote(user, restaurant, date);
+            Optional<Vote> voteByUserIdAndDate = voteRepository.findByUserIdAndDate(userId, date);
+            Vote vote = voteByUserIdAndDate.orElse(new Vote(user, restaurant, date));
+            vote.setRestaurant(restaurant);
             return voteRepository.save(vote);
         } else {
             throw new VoteException("you can not vote this date");
@@ -52,14 +54,17 @@ public class VoteServiceImpl implements VoteService {
     }
 
     @Override
-    public boolean delete(int id) {
-        return voteRepository.delete(id) != 0;
+    public Vote save(Vote vote) {
+        if (canVote(vote.getDate())) {
+            return voteRepository.save(vote);
+        } else {
+            throw new VoteException("you can not vote this date");
+        }
     }
 
     @Override
-    public Vote get(int id) {
-        return voteRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Not found entity with id:" + id));
+    public boolean delete(int userId, LocalDate date) {
+        return voteRepository.delete(userId, date) != 0;
     }
 
     @Override
@@ -80,7 +85,13 @@ public class VoteServiceImpl implements VoteService {
         return map;
     }
 
+    @Override
+    public Vote get(int userId, LocalDate date) {
+        return voteRepository.findByUserIdAndDate(userId, date).orElse(null);
+    }
+
     private boolean canVote(LocalDate date) {
-        return LocalDateTime.now().isBefore(LocalDateTime.of(date, DEADLINE));
+        return true;  //TODO
+        //return LocalDateTime.now().isBefore(LocalDateTime.of(date, DEADLINE));
     }
 }

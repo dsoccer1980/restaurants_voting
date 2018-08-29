@@ -24,33 +24,32 @@ public class VoteServiceTest extends AbstractServiceTest {
     public void save() {
         LocalDate date = LocalDate.now().plusDays(1);
         Vote vote = service.save(USER_ID1, RESTAURANT_ID1, date);
-        assertEquals(service.getVotesByRestaurantAndByDate(RESTAURANT_ID1, date), Arrays.asList(vote));
+        assertEquals(service.getVotesByRestaurantAndByDate(RESTAURANT_ID1, date), Collections.singletonList(vote));
     }
 
     @Test
     public void delete() {
-        service.delete(VOTE_ID1);
+        service.delete(USER_ID1, DATE1);
         List<Vote> votes = service.getVotesByRestaurantAndByDate(RESTAURANT_ID1, DATE1);
         assertEquals(Collections.emptyList(), votes);
     }
 
     @Test
-    public void get() {
-        Vote vote = service.get(VOTE_ID1);
-        assertEquals(VOTE1, vote);
-    }
-
-
-    @Test
     public void getVotesByRestaurantAndByDate() {
         List<Vote> votes = service.getVotesByRestaurantAndByDate(RESTAURANT_ID1, DATE1);
-        assertEquals(Arrays.asList(VOTE1), votes);
+        assertEquals(Collections.singletonList(VOTE1), votes);
     }
 
     @Test
     public void getVotesByUserId() {
         List<Vote> votes = service.getAllVotesByUser(USER_ID1);
-        assertEquals(Arrays.asList(VOTE1), votes);
+        assertEquals(Collections.singletonList(VOTE1), votes);
+    }
+
+    @Test
+    public void getVotesByUserIdAndDate() {
+        Vote vote = service.get(USER_ID1, DATE1);
+        assertEquals(VOTE1, vote);
     }
 
     @Test
