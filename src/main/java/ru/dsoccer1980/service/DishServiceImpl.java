@@ -3,11 +3,13 @@ package ru.dsoccer1980.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.dsoccer1980.model.Dish;
+import ru.dsoccer1980.model.Restaurant;
 import ru.dsoccer1980.repository.CrudDishRepository;
 import ru.dsoccer1980.util.exception.NotFoundException;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static ru.dsoccer1980.util.ValidationUtil.checkNotFoundWithId;
 
@@ -54,6 +56,14 @@ public class DishServiceImpl implements DishService {
     public List<Dish> getAllDishByRestaurantAndDate(int id, LocalDate date) {
         Objects.requireNonNull(date, "date must not be null");
         return repository.findDishByRestaurantIdAndDate(id, date);
+    }
+
+    @Override
+    public Map<Restaurant, List<Dish>> getAllDishDate(LocalDate date) {
+        Objects.requireNonNull(date, "date must not be null");
+        return repository.findDishByDate(date)
+                .stream()
+                .collect(Collectors.groupingBy(Dish::getRestaurant));
     }
 
 }

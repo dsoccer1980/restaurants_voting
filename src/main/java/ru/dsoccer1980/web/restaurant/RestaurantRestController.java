@@ -12,6 +12,7 @@ import ru.dsoccer1980.service.RestaurantService;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -42,4 +43,12 @@ public class RestaurantRestController {
             @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         return dishService.getAllDishByRestaurantAndDate(id, date);
     }
+
+    @GetMapping(value = "/dish/by")
+    public Map<Restaurant, List<Dish>> getAllDishByDate(
+            @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+        return dishService.getAllDishDate(date);
+    }
+
+
 }

@@ -24,7 +24,7 @@ public class VoteRestController {
     @Autowired
     private VoteService voteService;
 
-    @PostMapping(value = "/restaurant/{restaurantId}/date/{date}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/restaurant/{restaurantId}/date/{date}")
     public ResponseEntity<Void> createWithLocation(
             @PathVariable("restaurantId") int restaurantId,
             @PathVariable("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {

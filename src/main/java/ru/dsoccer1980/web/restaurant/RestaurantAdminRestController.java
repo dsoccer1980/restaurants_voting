@@ -17,7 +17,7 @@ import java.net.URI;
 @RequestMapping(value = RestaurantAdminRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class RestaurantAdminRestController {
 
-    static final String REST_URL = "/rest/admin/restaurants";
+    static final String REST_URL = "/rest/admin/restaurants/";
 
     @Autowired
     private RestaurantService restaurantService;
