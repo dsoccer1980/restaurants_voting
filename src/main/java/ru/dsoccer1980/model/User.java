@@ -1,6 +1,8 @@
 package ru.dsoccer1980.model;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -27,6 +29,7 @@ public class User extends AbstractNamedEntity {
 
     @Column(name = "registered", columnDefinition = "timestamp default now()")
     @NotNull
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private LocalDate registered = LocalDate.now();
 
     @Column(name = "isadmin", nullable = false, columnDefinition = "bool default false")
