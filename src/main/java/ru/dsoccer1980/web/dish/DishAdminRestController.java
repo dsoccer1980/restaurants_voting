@@ -37,7 +37,7 @@ public class DishAdminRestController {
         uriParams.put("id", created.getId());
 
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path(REST_URL + "/{restaurantId}")
+                .path(REST_URL + "/{id}")
                 .buildAndExpand(uriParams).toUri();
 
         return ResponseEntity.created(uriOfNewResource).body(created);
@@ -51,8 +51,8 @@ public class DishAdminRestController {
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void update(@RequestBody Dish dish) {
+        dish.setRestaurant(dishService.get(dish.getId()).getRestaurant());
         dishService.update(dish);
     }
-
 
 }
