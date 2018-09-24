@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import ru.dsoccer1980.AuthorizedUser;
+import ru.dsoccer1980.web.AuthorizedUser;
 
 import ru.dsoccer1980.model.User;
 
@@ -23,7 +23,7 @@ public class UserRestController {
 
     @GetMapping
     public User getProfile() {
-        int id = AuthorizedUser.id();
+        int id = AuthorizedUser.getId();
         return userService.get(id);
     }
 
@@ -35,7 +35,7 @@ public class UserRestController {
     @DeleteMapping()
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void delete() {
-        int id = AuthorizedUser.id();
+        int id = AuthorizedUser.getId();
         userService.delete(id);
     }
 }
