@@ -12,6 +12,7 @@ import ru.dsoccer1980.util.exception.NotFoundException;
 import ru.dsoccer1980.util.exception.VoteException;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Map;
@@ -91,7 +92,6 @@ public class VoteServiceImpl implements VoteService {
     }
 
     private boolean canVote(LocalDate date) {
-        return true;  //TODO
-        //return LocalDateTime.now().isBefore(LocalDateTime.of(date, DEADLINE));
+        return LocalDateTime.now().isBefore(LocalDateTime.of(date, DEADLINE));
     }
 }
