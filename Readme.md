@@ -30,7 +30,12 @@ Response <br>
 <br> Response <br>
 {"id":100003,"name":"Ginza","address":"Sadovaya 12"}
 
- - Get all restaurants with dishes for this day <br>
+ - Get menu of chosen restaurant for chosen day <br>
+``` curl -s http://localhost:8080/rest/restaurants/100003/dish/by?date=2018-07-26 --user user1@yandex.ru:password```
+<br> Response <br>
+[{"id":100005,"name":"Borsch","price":250,"restaurant":null,"date":"2018-07-26"},{"id":100006,"name":"Cutlet","price":175,"restaurant":null,"date":"2018-07-26"},{"id":100007,"name":"Stewed fruit","price":55,"restaurant":null,"date":"2018-07-26"}]
+
+ - Get all restaurants with dishes for chosen day <br>
 ``` curl -s http://localhost:8080/rest/restaurants/dish/by?date=2018-07-26 --user user1@yandex.ru:password```
 <br> Response <br>
 {"Restaurant{restaurantId=100004, name=Teremok, address=Nevskij 10}":[{"id":100008,"name":"Saltwort","price":260,"restaurant":{"id":100004,"name":"Teremok","address":"Nevskij 10"},"date":"2018-07-26"},{"id":100009,"name":"Cutlet","price":175,"restaurant":{"id":100004,"name":"Teremok","address":"Nevskij 10"},"date":"2018-07-26"},{"id":100010,"name":"Orange juice","price":40,"restaurant":{"id":100004,"name":"Teremok","address":"Nevskij 10"},"date":"2018-07-26"}],"Restaurant{restaurantId=100003, name=Ginza, address=Sadovaya 12}":[{"id":100005,"name":"Borsch","price":250,"restaurant":{"id":100003,"name":"Ginza","address":"Sadovaya 12"},"date":"2018-07-26"},{"id":100006,"name":"Cutlet","price":175,"restaurant":{"id":100003,"name":"Ginza","address":"Sadovaya 12"},"date":"2018-07-26"},{"id":100007,"name":"Stewed fruit","price":55,"restaurant":{"id":100003,"name":"Ginza","address":"Sadovaya 12"},"date":"2018-07-26"}]
@@ -110,10 +115,19 @@ Response <br>
 <br> Response <br>
 {"id":100018,"name":"UpdatedUser","email":"update@yandex.ru","password":"updatedpass","registered":"2018-09-23","isAdmin":false}
 
- - Request to delete user by id <br>
+- Update user profile <br>
+```curl -s -X PUT -d '{"id":100018,"name":"UpdateUser","email":"update@yandex.ru","password":"Updatepass"}' -H 'Content-Type: application/json;charset=UTF-8' http://localhost:8080/rest/admin/users/ --user admin@gmail.com:admin```
+
+ - Delete user by id <br>
 ```curl -s -X DELETE http://localhost:8080/rest/admin/users/100018 --user admin@gmail.com:admin```
 
- - Request to get all users <br>
+ - Get all users <br>
 ```curl -s http://localhost:8080/rest/admin/users/ --user admin@gmail.com:admin```
 <br> Response <br>
 [{"id":100001,"name":"User2","email":"user2@yandex.ru","password":"password","registered":"2018-09-23","isAdmin":false},{"id":100002,"name":"Admin","email":"admin@gmail.com","password":"admin","registered":"2018-09-23","isAdmin":true}]
+
+ - Get user by email   <br>
+``` curl -s http://localhost:8080/rest/admin/users/by?email=user2@yandex.ru --user admin@gmail.com:admin```
+<br> Response <br>
+{"id":100001,"name":"User2","email":"user2@yandex.ru","password":"password","registered":"2018-09-26","isAdmin":false}
+

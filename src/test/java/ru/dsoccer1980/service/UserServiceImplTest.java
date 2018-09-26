@@ -2,6 +2,7 @@ package ru.dsoccer1980.service;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import ru.dsoccer1980.model.User;
 
 
@@ -14,6 +15,7 @@ import static ru.dsoccer1980.testdata.UserTestData.*;
 public class UserServiceImplTest extends AbstractServiceTest {
 
     @Autowired
+    @Qualifier("userService")
     private UserService service;
 
     @Test
