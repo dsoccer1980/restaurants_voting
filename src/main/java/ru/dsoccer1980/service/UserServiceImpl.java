@@ -1,6 +1,8 @@
 package ru.dsoccer1980.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -35,23 +37,27 @@ public class UserServiceImpl implements UserService,UserDetailsService {
         return checkNotFoundWithId(user, id);
     }
 
+    @CacheEvict(value = "users", allEntries = true)
     @Override
     public User update(User user) throws NotFoundException {
         Assert.notNull(user, "user must not be null");
         return checkNotFoundWithId(repository.save(user), user.getId());
     }
 
+    @Cacheable("users")
     @Override
     public List<User> getAll() {
         return repository.findAll();
     }
 
+    @CacheEvict(value = "users", allEntries = true)
     @Override
     public User create(User user) {
         Assert.notNull(user, "user must not be null");
         return repository.save(user);
     }
 
+    @CacheEvict(value = "users", allEntries = true)
     @Override
     public void delete(int id) throws NotFoundException {
         checkNotFoundWithId(repository.delete(id), id);
