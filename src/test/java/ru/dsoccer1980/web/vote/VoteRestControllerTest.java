@@ -1,4 +1,4 @@
-package ru.dsoccer1980.web.restaurant;
+package ru.dsoccer1980.web.vote;
 
 import org.junit.Test;
 import org.springframework.http.MediaType;
@@ -8,27 +8,27 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static ru.dsoccer1980.testdata.RestaurantTestData.RESTAURANT_ID1;
 import static ru.dsoccer1980.testdata.TestUtil.userHttpBasic;
 import static ru.dsoccer1980.testdata.UserTestData.USER1;
+import static ru.dsoccer1980.testdata.VoteTestData.DATE1;
 
-public class RestaurantRestControllerTest extends AbstractControllerTest {
+public class VoteRestControllerTest extends AbstractControllerTest {
 
-    private static final String REST_URL = RestaurantRestController.REST_URL + '/';
+    private static final String REST_URL = VoteRestController.REST_URL + '/';
+
 
     @Test
     public void getTest() throws Exception {
-        mockMvc.perform(get(REST_URL + RESTAURANT_ID1)
+        mockMvc.perform(get(REST_URL + DATE1)
                 .with(userHttpBasic(USER1)))
                 .andExpect(status().isOk())
                 .andDo(print())
-                // https://jira.spring.io/browse/SPR-14472
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
     }
 
     @Test
-    public void getAllTest() throws Exception {
-        mockMvc.perform(get(REST_URL)
+    public void getAllVotesTest() throws Exception {
+        mockMvc.perform(get(REST_URL + "/user/")
                 .with(userHttpBasic(USER1)))
                 .andExpect(status().isOk())
                 .andDo(print())
